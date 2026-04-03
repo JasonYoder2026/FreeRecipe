@@ -1,55 +1,67 @@
+<nav>
+  <img src="/icon.png" alt="Free Recipe logo" class="nav-logo w-32 h-32">
+  <a href="/" class="nav-wordmark">Free Recipe</a>
+</nav>
 
-    <nav>
-        <img src="/icon.png" alt="Free Recipe logo" class="nav-logo w-32 h-32">
-        <a href="/" class="nav-wordmark">Free Recipe</a>
-    </nav>
+<main class="min-h-screen flex flex-col">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">
+        <img src="/icon.png" alt="Free Recipe logo" class="hero-icon">
+      </div>
+      <h1>Welcome!</h1>
+      <p>Create an account to get access to countless recipes!</p>
+    </div>
 
-    <main class="min-h-screen flex flex-col">
-        <div class="card">
-            <div class="card-header">
-                <div class="card-icon">
-                    <img src="/icon.png" alt="Free Recipe logo" class="hero-icon">
-                </div>
-                <h1>Welcome!</h1>
-                <p>Create an account to get access to countless recipes!</p>
-            </div>
+    <!-- Message Display -->
+    <div *ngIf="message" class="message" [class.message-success]="messageType === 'success'"
+      [class.message-error]="messageType === 'error'">
+      {{ message }}
+    </div>
 
-            <form (ngSubmit)="signUp(creds)">
-                <div class="form-group">
-                    <label for="firstName">First Name</label>
-                    <input type="firstName" id="firstName" name="firstName" placeholder="John" autocomplete="firstName" [(ngModel)]="creds.firstName" required />
-                </div>
+    <form (ngSubmit)="signUp(creds)">
+      <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input type="text" id="firstName" name="firstName" placeholder="John" autocomplete="given-name"
+          [(ngModel)]="creds.firstName" required [disabled]="isLoading" />
+      </div>
 
-                <div class="form-group">
-                    <label for="lastName">Last Name</label>
-                    <input type="lastName" id="lastName" name="lastName" placeholder="Doe" autocomplete="lastName" [(ngModel)]="creds.lastName" required />
-                </div>
+      <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input type="text" id="lastName" name="lastName" placeholder="Doe" autocomplete="family-name"
+          [(ngModel)]="creds.lastName" required [disabled]="isLoading" />
+      </div>
 
-                <div class="form-group">
-                    <label for="email">Email address</label>
-                    <input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email"
-                        [(ngModel)]="creds.email" required />
-                </div>
+      <div class="form-group">
+        <label for="email">Email address</label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email"
+          [(ngModel)]="creds.email" required [disabled]="isLoading" />
+      </div>
 
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" placeholder="••••••••" [(ngModel)]="creds.password" required />
-                </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="••••••••" autocomplete="new-password"
+          [(ngModel)]="creds.password" required [disabled]="isLoading" />
+      </div>
 
-                <div class="form-group">
-                    <label for="confirmPassword">Confirm Password</label>
-                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="••••••••" [(ngModel)]="creds.confirmPassword" required />
-                </div>
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="••••••••"
+          autocomplete="new-password" [(ngModel)]="creds.confirmPassword" required [disabled]="isLoading" />
+      </div>
 
-                <button type="submit" class="btn-submit">Sign in</button>
-            </form>
+      <button type="submit" class="btn-submit" [disabled]="isLoading">
+        <span *ngIf="!isLoading">Sign up</span>
+        <span *ngIf="isLoading">Creating account...</span>
+      </button>
+    </form>
 
-            <div class="divider">or</div>
+    <div class="divider">or</div>
 
-            <p class="switch-link">Already have an account? <a href="/login">Sign in</a></p>
-        </div>
-    </main>
+    <p class="switch-link">Already have an account? <a href="/login">Sign in</a></p>
+  </div>
+</main>
 
-    <footer>
-        <p>&copy; 2025 Free Recipe. All rights reserved.</p>
-    </footer>
+<footer>
+  <p>&copy; 2025 Free Recipe. All rights reserved.</p>
+</footer>

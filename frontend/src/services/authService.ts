@@ -13,5 +13,9 @@ export interface SignupCredentials {
 export enum AuthenticationResponse {
   success,
   failure,
-  invalidPermissions
+  invalidPermissions,
+  invalidCredentials,
+  emailAlreadyInUse,
+  missingFields,
+  serverError
 }
