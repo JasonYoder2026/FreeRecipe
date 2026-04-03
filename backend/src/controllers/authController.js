@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const userRepository = require('../repositories/authRepository');
 
 async function createUser(req, res) {
+    console.log('Received request to create user:', req.body);
     try {
         const { firstName, lastName, email, password } = req.body;
 

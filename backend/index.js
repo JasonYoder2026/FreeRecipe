@@ -3,6 +3,8 @@ require('dotenv').config();
 const App = express();
 const pool = require('./src/db');
 const authRoutes = require('./src/routes/auth');
+const cors = require('cors');
+App.use(cors());
 
 App.use(express.json());
 App.use('/api/auth', authRoutes);
