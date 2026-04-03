@@ -9,7 +9,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "migrate:create": "node-pg-migrate create",
-    "migrate:up": "node-pg-migrate up",
+    "migrate:up": "node-pg-migrate up -m backend/src/migrations",
     "migrate:down": "node-pg-migrate down"
   },
   "dependencies": {

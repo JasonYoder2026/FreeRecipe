@@ -14,31 +14,31 @@
                 <p>Create an account to get access to countless recipes!</p>
             </div>
 
-            <form action="/register" method="POST">
+            <form (ngSubmit)="signUp(creds)">
                 <div class="form-group">
                     <label for="firstName">First Name</label>
-                    <input type="firstName" id="firstName" name="firstName" placeholder="John" autocomplete="firstName" required />
+                    <input type="firstName" id="firstName" name="firstName" placeholder="John" autocomplete="firstName" [(ngModel)]="creds.firstName" required />
                 </div>
 
                 <div class="form-group">
                     <label for="lastName">Last Name</label>
-                    <input type="lastName" id="lastName" name="lastName" placeholder="Doe" autocomplete="lastName" required />
+                    <input type="lastName" id="lastName" name="lastName" placeholder="Doe" autocomplete="lastName" [(ngModel)]="creds.lastName" required />
                 </div>
 
                 <div class="form-group">
                     <label for="email">Email address</label>
                     <input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email"
-                        required />
+                        [(ngModel)]="creds.email" required />
                 </div>
 
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" id="password" name="password" placeholder="••••••••" required />
+                    <input type="password" id="password" name="password" placeholder="••••••••" [(ngModel)]="creds.password" required />
                 </div>
 
                 <div class="form-group">
                     <label for="confirmPassword">Confirm Password</label>
-                    <input type="password" id="confirmPassword" name="password" placeholder="••••••••" required />
+                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="••••••••" [(ngModel)]="creds.confirmPassword" required />
                 </div>
 
                 <button type="submit" class="btn-submit">Sign in</button>
@@ -46,7 +46,7 @@
 
             <div class="divider">or</div>
 
-            <p class="switch-link">Don't have an account? <a href="/register">Sign up free</a></p>
+            <p class="switch-link">Already have an account? <a href="/login">Sign in</a></p>
         </div>
     </main>
 
