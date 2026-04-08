@@ -21,7 +21,13 @@
         <p>Sign in to your Free Recipe account</p>
       </div>
 
-      <form action="/login" method="POST">
+      <!-- Message Display -->
+      <div *ngIf="message" class="message" [class.message-success]="messageType === 'success'"
+        [class.message-error]="messageType === 'error'">
+        {{ message }}
+      </div>
+
+      <form (ngSubmit)="login(email, password)">
         <div class="form-group">
           <label for="email">Email address</label>
           <input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email" required />
@@ -33,7 +39,10 @@
           <a href="/forgot-password" class="forgot">Forgot password?</a>
         </div>
 
-        <button type="submit" class="btn-submit">Sign in</button>
+        <button type="submit" class="btn-submit" [disabled]="isLoading">
+          <span *ngIf="!isLoading">Sign in</span>
+          <span *ngIf="isLoading">Logging in...</span>
+        </button>
       </form>
 
       <div class="divider">or</div>

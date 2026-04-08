@@ -1,5 +1,6 @@
 export interface AuthService {
   signup(signupCredentials: SignupCredentials): Promise<AuthenticationResponse>;
+  login(email: string, password: string): Promise<AuthenticationResponse>;
 }
 
 export interface SignupCredentials {

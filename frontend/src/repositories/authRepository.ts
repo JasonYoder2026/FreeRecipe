@@ -36,4 +36,32 @@ export class AuthRepository implements AuthService {
       }
     }
   }
+
+  async login(email: string, password: string): Promise<AuthenticationResponse> {
+    try {
+      const res = await firstValueFrom(
+        this.http.post(`${this.baseUrl}/login`, { email, password }, { observe: 'response' })
+      );
+
+      switch (res.status) {
+        case 200:
+          return AuthenticationResponse.success;
+        default:
+          return AuthenticationResponse.failure;
+      }
+
+    } catch (err: any) {
+      switch (err.status) {
+        case 409:
+          return AuthenticationResponse.emailAlreadyInUse;
+        case 400:
+          return AuthenticationResponse.missingFields;
+        case 500:
+          return AuthenticationResponse.serverError;
+        default:
+          return AuthenticationResponse.failure;
+      }
+    }
+  }
+
 }
