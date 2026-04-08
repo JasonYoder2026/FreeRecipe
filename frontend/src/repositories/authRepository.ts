@@ -54,6 +54,10 @@ export class AuthRepository implements AuthService {
       switch (err.status) {
         case 409:
           return AuthenticationResponse.emailAlreadyInUse;
+        case 404:
+          return AuthenticationResponse.noExistingUser;
+        case 401:
+          return AuthenticationResponse.invalidCredentials;
         case 400:
           return AuthenticationResponse.missingFields;
         case 500:

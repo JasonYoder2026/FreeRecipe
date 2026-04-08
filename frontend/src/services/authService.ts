@@ -18,5 +18,6 @@ export enum AuthenticationResponse {
   invalidCredentials,
   emailAlreadyInUse,
   missingFields,
-  serverError
+  serverError,
+  noExistingUser
 }
