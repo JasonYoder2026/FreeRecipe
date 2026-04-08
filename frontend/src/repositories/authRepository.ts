@@ -40,11 +40,12 @@ export class AuthRepository implements AuthService {
   async login(email: string, password: string): Promise<AuthenticationResponse> {
     try {
       const res = await firstValueFrom(
-        this.http.post(`${this.baseUrl}/login`, { email, password }, { observe: 'response' })
+        this.http.post<{ token: string }>(`${this.baseUrl}/login`, { email, password }, { observe: 'response' })
       );
 
       switch (res.status) {
         case 200:
+          localStorage.setItem('authToken', res.body!.token);
           return AuthenticationResponse.success;
         default:
           return AuthenticationResponse.failure;
