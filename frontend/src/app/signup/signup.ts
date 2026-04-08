@@ -50,7 +50,7 @@ export class Signup {
       switch (response) {
         case AuthenticationResponse.success:
           setTimeout(() => {
-            this.router.navigate(['/']);  
+            this.router.navigate(['/home']);
           }, 1500);
           break;
 

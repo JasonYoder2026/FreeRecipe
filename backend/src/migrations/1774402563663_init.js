@@ -26,6 +26,35 @@ exports.up = (pgm) => {
       default: pgm.func('current_timestamp'),
     },
   });
+
+  pgm.createTable('recipes', {
+    id: {
+      type: 'serial',
+      primaryKey: true,
+    },
+    title: {
+      type: 'varchar(255)',
+      notNull: true,
+    },
+    description: {
+      type: 'text',
+    },
+    ingredients: {
+      type: 'text',
+    },
+    instructions: {
+      type: 'text',
+    },
+    user_id: {
+      type: 'integer',
+      references: 'users(id)',
+      onDelete: 'cascade',
+    },
+    created_at: {
+      type: 'timestamp',
+      default: pgm.func('current_timestamp'),
+    },
+  })
 };
 
 exports.down = (pgm) => {
