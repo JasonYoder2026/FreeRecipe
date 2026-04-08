@@ -31,6 +31,9 @@ async function loginUser(req, res) {
     try {
         const { email, password } = req.body;
 
+        console.log('Login attempt for email:', email);
+        console.log('Request password:', password);
+
         if (!email || !password) {
             return res.status(400).json({ error: 'Email and password are required' });
         }
@@ -40,7 +43,7 @@ async function loginUser(req, res) {
             return res.status(404).json({ error: 'User not found' });
         }
 
-        const isMatch = await bcrypt.compare(password, user.passwordHash);
+        const isMatch = await bcrypt.compare(password, user.password_hash);
         if (!isMatch) {
             console.log('Invalid password for email:', email);
             return res.status(401).json({ error: 'Invalid password' });

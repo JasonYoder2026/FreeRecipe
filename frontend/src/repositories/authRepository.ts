@@ -39,6 +39,7 @@ export class AuthRepository implements AuthService {
 
   async login(email: string, password: string): Promise<AuthenticationResponse> {
     try {
+      console.log('AuthRepository: Attempting login with email:', email);
       const res = await firstValueFrom(
         this.http.post(`${this.baseUrl}/login`, { email, password }, { observe: 'response' })
       );
@@ -52,8 +53,6 @@ export class AuthRepository implements AuthService {
 
     } catch (err: any) {
       switch (err.status) {
-        case 409:
-          return AuthenticationResponse.emailAlreadyInUse;
         case 404:
           return AuthenticationResponse.noExistingUser;
         case 401:

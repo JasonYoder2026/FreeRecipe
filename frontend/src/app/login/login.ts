@@ -50,16 +50,23 @@ export class Login {
           this.messageType = 'error';
           break;
 
-        case AuthenticationResponse.failure:
+        case AuthenticationResponse.noExistingUser:
+          this.message = 'No account found with that email. Please sign up.';
+          this.messageType = 'error';
+          break;
+        case AuthenticationResponse.invalidCredentials:
+          this.message = 'Invalid email or password. Please try again.';
+          this.messageType = 'error';
+          break;
         default:
-          this.message = 'Signup failed. Please try again.';
+          this.message = 'Login failed. Please try again.';
           this.messageType = 'error';
           break;
       }
 
       this.cdr.detectChanges();
     } catch (error) {
-      console.error('Signup failed:', error);
+      console.error('Login failed:', error);
       this.message = 'An unexpected error occurred. Please try again.';
       this.messageType = 'error';
       this.cdr.detectChanges();
