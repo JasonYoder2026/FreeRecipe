@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const userRepository = require('../repositories/authRepository');
+const jwt = require('jsonwebtoken');
 
 async function createUser(req, res) {
     try {
@@ -31,9 +32,6 @@ async function loginUser(req, res) {
     try {
         const { email, password } = req.body;
 
-        console.log('Login attempt for email:', email);
-        console.log('Request password:', password);
-
         if (!email || !password) {
             return res.status(400).json({ error: 'Email and password are required' });
         }
@@ -49,8 +47,13 @@ async function loginUser(req, res) {
             return res.status(401).json({ error: 'Invalid password' });
         }
 
-        console.log('User logged in successfully:', user);
-        res.status(200).json({ message: 'Login successful' });
+        const token = jwt.sign(
+            {userId: user.id, email: user.email},
+            process.env.JWT_SECRET,
+            { expiresIn: '1h' }
+        );
+
+        res.status(200).json({ message: 'Login successful', token: token });
 
     } catch (error) {
         console.error('Error logging in user:', error);
